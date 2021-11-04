@@ -13,18 +13,18 @@ public class Board : MonoBehaviour
     public RectInt Bounds {
         get
         {
-            Vector2Int position = new Vector2Int(-this.boardSize.x / 2, -this.boardSize.y / 2);
-            return new RectInt(position, this.boardSize);
+            Vector2Int position = new Vector2Int(-boardSize.x / 2, -boardSize.y / 2);
+            return new RectInt(position, boardSize);
         }
     }
 
     private void Awake()
     {
-        this.tilemap = GetComponentInChildren<Tilemap>();
-        this.activePiece = GetComponentInChildren<Piece>();
+        tilemap = GetComponentInChildren<Tilemap>();
+        activePiece = GetComponentInChildren<Piece>();
 
-        for (int i = 0; i < this.tetrominoes.Length; i++) {
-            this.tetrominoes[i].Initialize();
+        for (int i = 0; i < tetrominoes.Length; i++) {
+            tetrominoes[i].Initialize();
         }
     }
 
@@ -35,21 +35,21 @@ public class Board : MonoBehaviour
 
     public void SpawnPiece()
     {
-        int random = Random.Range(0, this.tetrominoes.Length);
-        TetrominoData data = this.tetrominoes[random];
+        int random = Random.Range(0, tetrominoes.Length);
+        TetrominoData data = tetrominoes[random];
 
-        this.activePiece.Initialize(this, this.spawnPosition, data);
+        activePiece.Initialize(this, spawnPosition, data);
 
-        if (!IsValidPosition(this.activePiece, this.spawnPosition)) {
+        if (!IsValidPosition(activePiece, spawnPosition)) {
             GameOver();
         } else {
-            Set(this.activePiece);
+            Set(activePiece);
         }
     }
 
     public void GameOver()
     {
-        this.tilemap.ClearAllTiles();
+        tilemap.ClearAllTiles();
 
         // Do anything else you want on game over here..
     }
@@ -59,7 +59,7 @@ public class Board : MonoBehaviour
         for (int i = 0; i < piece.cells.Length; i++)
         {
             Vector3Int tilePosition = piece.cells[i] + piece.position;
-            this.tilemap.SetTile(tilePosition, piece.data.tile);
+            tilemap.SetTile(tilePosition, piece.data.tile);
         }
     }
 
@@ -68,13 +68,13 @@ public class Board : MonoBehaviour
         for (int i = 0; i < piece.cells.Length; i++)
         {
             Vector3Int tilePosition = piece.cells[i] + piece.position;
-            this.tilemap.SetTile(tilePosition, null);
+            tilemap.SetTile(tilePosition, null);
         }
     }
 
     public bool IsValidPosition(Piece piece, Vector3Int position)
     {
-        RectInt bounds = this.Bounds;
+        RectInt bounds = Bounds;
 
         // The position is only valid if every cell is valid
         for (int i = 0; i < piece.cells.Length; i++)
@@ -87,7 +87,7 @@ public class Board : MonoBehaviour
             }
 
             // A tile already occupies the position, thus invalid
-            if (this.tilemap.HasTile(tilePosition)) {
+            if (tilemap.HasTile(tilePosition)) {
                 return false;
             }
         }
@@ -97,7 +97,7 @@ public class Board : MonoBehaviour
 
     public void ClearLines()
     {
-        RectInt bounds = this.Bounds;
+        RectInt bounds = Bounds;
         int row = bounds.yMin;
 
         // Clear from bottom to top
@@ -115,14 +115,14 @@ public class Board : MonoBehaviour
 
     public bool IsLineFull(int row)
     {
-        RectInt bounds = this.Bounds;
+        RectInt bounds = Bounds;
 
         for (int col = bounds.xMin; col < bounds.xMax; col++)
         {
             Vector3Int position = new Vector3Int(col, row, 0);
 
             // The line is not full if a tile is missing
-            if (!this.tilemap.HasTile(position)) {
+            if (!tilemap.HasTile(position)) {
                 return false;
             }
         }
@@ -132,13 +132,13 @@ public class Board : MonoBehaviour
 
     public void LineClear(int row)
     {
-        RectInt bounds = this.Bounds;
+        RectInt bounds = Bounds;
 
         // Clear all tiles in the row
         for (int col = bounds.xMin; col < bounds.xMax; col++)
         {
             Vector3Int position = new Vector3Int(col, row, 0);
-            this.tilemap.SetTile(position, null);
+            tilemap.SetTile(position, null);
         }
 
         // Shift every row above down one
@@ -147,10 +147,10 @@ public class Board : MonoBehaviour
             for (int col = bounds.xMin; col < bounds.xMax; col++)
             {
                 Vector3Int position = new Vector3Int(col, row + 1, 0);
-                TileBase above = this.tilemap.GetTile(position);
+                TileBase above = tilemap.GetTile(position);
 
                 position = new Vector3Int(col, row, 0);
-                this.tilemap.SetTile(position, above);
+                tilemap.SetTile(position, above);
             }
 
             row++;
