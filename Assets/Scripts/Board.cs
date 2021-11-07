@@ -40,7 +40,7 @@ public class Board : MonoBehaviour
 
         activePiece.Initialize(this, spawnPosition, data);
 
-        if (!IsValidPosition(activePiece, spawnPosition)) {
+        if (!IsValidPosition(activePiece.cells, spawnPosition)) {
             GameOver();
         } else {
             Set(activePiece);
@@ -72,14 +72,14 @@ public class Board : MonoBehaviour
         }
     }
 
-    public bool IsValidPosition(Piece piece, Vector2Int position)
+    public bool IsValidPosition(Vector2Int[] cells, Vector2Int position)
     {
         RectInt bounds = Bounds;
 
         // The position is only valid if every cell is valid
-        for (int i = 0; i < piece.cells.Length; i++)
+        for (int i = 0; i < cells.Length; i++)
         {
-            Vector2Int tilePosition = piece.cells[i] + position;
+            Vector2Int tilePosition = cells[i] + position;
 
             // An out of bounds tile is invalid
             if (!bounds.Contains(tilePosition)) {

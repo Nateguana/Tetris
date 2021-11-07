@@ -7,7 +7,7 @@ public static class Data
     public static readonly float sin = Mathf.Sin(Mathf.PI / 2f);
     public static readonly float[] RotationMatrix = new float[] { cos, sin, -sin, cos };
 
-    private static Vector2Int V(int x,int y)
+    private static Vector2Int V(int x, int y)
     {
         return new Vector2Int(x, y);
     }
@@ -22,38 +22,5 @@ public static class Data
         { Tetromino.T, new Vector2Int[] { V( 0, 1), V(-1, 0), V( 0, 0), V( 1, 0) } },
         { Tetromino.Z, new Vector2Int[] { V(-1, 1), V( 0, 1), V( 0, 0), V( 1, 0) } },
     };
-
-    //private static readonly Vector2Int[,] WallKicksI = new Vector2Int[,] {
-    //    { V(0, 0), V(-2, 0), V( 1, 0), V(-2,-1), V( 1, 2) },
-    //    { V(0, 0), V( 2, 0), V(-1, 0), V( 2, 1), V(-1,-2) },
-    //    { V(0, 0), V(-1, 0), V( 2, 0), V(-1, 2), V( 2,-1) },
-    //    { V(0, 0), V( 1, 0), V(-2, 0), V( 1,-2), V(-2, 1) },
-    //    { V(0, 0), V( 2, 0), V(-1, 0), V( 2, 1), V(-1,-2) },
-    //    { V(0, 0), V(-2, 0), V( 1, 0), V(-2,-1), V( 1, 2) },
-    //    { V(0, 0), V( 1, 0), V(-2, 0), V( 1,-2), V(-2, 1) },
-    //    { V(0, 0), V(-1, 0), V( 2, 0), V(-1, 2), V( 2,-1) },
-    //};
-
-    //private static readonly Vector2Int[,] WallKicksJLOSTZ = new Vector2Int[,] {
-    //    { V(0, 0), V(-1, 0), V(-1, 1), V(0,-2), V(-1,-2) },
-    //    { V(0, 0), V( 1, 0), V( 1,-1), V(0, 2), V( 1, 2) },
-    //    { V(0, 0), V( 1, 0), V( 1,-1), V(0, 2), V( 1, 2) },
-    //    { V(0, 0), V(-1, 0), V(-1, 1), V(0,-2), V(-1,-2) },
-    //    { V(0, 0), V( 1, 0), V( 1, 1), V(0,-2), V( 1,-2) },
-    //    { V(0, 0), V(-1, 0), V(-1,-1), V(0, 2), V(-1, 2) },
-    //    { V(0, 0), V(-1, 0), V(-1,-1), V(0, 2), V(-1, 2) },
-    //    { V(0, 0), V( 1, 0), V( 1, 1), V(0,-2), V( 1,-2) },
-    //};
-
-    //public static readonly Dictionary<Tetromino, Vector2Int[,]> WallKicks = new Dictionary<Tetromino, Vector2Int[,]>()
-    //{
-    //    { Tetromino.I, WallKicksI },
-    //    { Tetromino.J, WallKicksJLOSTZ },
-    //    { Tetromino.L, WallKicksJLOSTZ },
-    //    { Tetromino.O, WallKicksJLOSTZ },
-    //    { Tetromino.S, WallKicksJLOSTZ },
-    //    { Tetromino.T, WallKicksJLOSTZ },
-    //    { Tetromino.Z, WallKicksJLOSTZ },
-    //};
-
 }
+
