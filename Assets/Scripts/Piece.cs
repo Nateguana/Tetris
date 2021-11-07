@@ -76,14 +76,14 @@ public class Piece : MonoBehaviour
 
         // Soft drop movement
         if (Input.GetKey(KeyCode.S)) {
-            MoveCheck(Vector2Int.down);
+            Move(Vector2Int.down);
         }
 
         // Left/right movement
         if (Input.GetKey(KeyCode.A)) {
-            MoveCheck(Vector2Int.left);
+            Move(Vector2Int.left);
         } else if (Input.GetKey(KeyCode.D)) {
-            MoveCheck(Vector2Int.right);
+            Move(Vector2Int.right);
         }
     }
 
@@ -94,7 +94,7 @@ public class Piece : MonoBehaviour
         // Do not move down if the player is already holding down
         // otherwise it can cause a double movement
         if (!Input.GetKey(KeyCode.S)) {
-            MoveCheck(Vector2Int.down);
+            Move(Vector2Int.down);
         }
 
         // Once the piece has been inactive for too long it becomes locked
@@ -105,7 +105,7 @@ public class Piece : MonoBehaviour
 
     private void HardDrop()
     {
-        while (MoveCheck(Vector2Int.down)) {
+        while (Move(Vector2Int.down)) {
             continue;
         }
 
