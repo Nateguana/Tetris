@@ -2,7 +2,9 @@ Version 0.0.1.0s1 notes
 
 - Escape key now exits game
 
-- Wall kick reimplemented: Now works on larger shapes
+- Previous wall kick algorithm replaced with a new one
+
+- Due to new algorithm, wall kick now functions with bigger shapes
 
 - Added a start screen
 
