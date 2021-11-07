@@ -4,8 +4,8 @@ public class Piece : MonoBehaviour
 {
     public Board board { get; private set; }
     public TetrominoData data { get; private set; }
-    public Vector3Int[] cells { get; private set; }
-    public Vector3Int position { get; private set; }
+    public Vector2Int[] cells { get; private set; }
+    public Vector2Int position { get; private set; }
     public int rotationIndex { get; private set; }
 
     public float stepDelay = 1f;
@@ -16,7 +16,7 @@ public class Piece : MonoBehaviour
     private float moveTime;
     private float lockTime;
 
-    public void Initialize(Board board, Vector3Int position, TetrominoData data)
+    public void Initialize(Board board, Vector2Int position, TetrominoData data)
     {
         this.data = data;
         this.board = board;
@@ -28,11 +28,11 @@ public class Piece : MonoBehaviour
         lockTime = 0f;
 
         if (cells == null) {
-            cells = new Vector3Int[data.cells.Length];
+            cells = new Vector2Int[data.cells.Length];
         }
 
         for (int i = 0; i < cells.Length; i++) {
-            cells[i] = (Vector3Int)data.cells[i];
+            cells[i] = data.cells[i];
         }
     }
 
@@ -121,7 +121,7 @@ public class Piece : MonoBehaviour
 
     private bool Move(Vector2Int translation)
     {
-        Vector3Int newPosition = position;
+        Vector2Int newPosition = position;
         newPosition.x += translation.x;
         newPosition.y += translation.y;
 
@@ -148,11 +148,11 @@ public class Piece : MonoBehaviour
         ApplyRotationMatrix(direction);
 
         // Revert the rotation if the wall kick tests fail
-        if (!TestWallKicks(rotationIndex, direction))
-        {
-            rotationIndex = originalRotation;
-            ApplyRotationMatrix(-direction);
-        }
+        //if (!TestWallKicks(rotationIndex, direction))
+        //{
+        //    rotationIndex = originalRotation;
+        //    ApplyRotationMatrix(-direction);
+        //}
     }
 
     private void ApplyRotationMatrix(int direction)
@@ -162,7 +162,7 @@ public class Piece : MonoBehaviour
         // Rotate all of the cells using the rotation matrix
         for (int i = 0; i < cells.Length; i++)
         {
-            Vector3 cell = cells[i];
+            Vector2 cell = cells[i];
 
             int x, y;
 
@@ -183,36 +183,36 @@ public class Piece : MonoBehaviour
                     break;
             }
 
-            cells[i] = new Vector3Int(x, y, 0);
+            cells[i] = new Vector2Int(x, y);
         }
     }
 
-    private bool TestWallKicks(int rotationIndex, int rotationDirection)
-    {
-        int wallKickIndex = GetWallKickIndex(rotationIndex, rotationDirection);
+    //private bool TestWallKicks(int rotationIndex, int rotationDirection)
+    //{
+    //    int wallKickIndex = GetWallKickIndex(rotationIndex, rotationDirection);
 
-        for (int i = 0; i < data.wallKicks.GetLength(1); i++)
-        {
-            Vector2Int translation = data.wallKicks[wallKickIndex, i];
+    //    for (int i = 0; i < data.wallKicks.GetLength(1); i++)
+    //    {
+    //        Vector2Int translation = data.wallKicks[wallKickIndex, i];
 
-            if (Move(translation)) {
-                return true;
-            }
-        }
+    //        if (Move(translation)) {
+    //            return true;
+    //        }
+    //    }
 
-        return false;
-    }
+    //    return false;
+    //}
 
-    private int GetWallKickIndex(int rotationIndex, int rotationDirection)
-    {
-        int wallKickIndex = rotationIndex * 2;
+    //private int GetWallKickIndex(int rotationIndex, int rotationDirection)
+    //{
+    //    int wallKickIndex = rotationIndex * 2;
 
-        if (rotationDirection < 0) {
-            wallKickIndex--;
-        }
+    //    if (rotationDirection < 0) {
+    //        wallKickIndex--;
+    //    }
 
-        return Wrap(wallKickIndex, 0, data.wallKicks.GetLength(0));
-    }
+    //    return Wrap(wallKickIndex, 0, data.wallKicks.GetLength(0));
+    //}
 
     private int Wrap(int input, int min, int max)
     {

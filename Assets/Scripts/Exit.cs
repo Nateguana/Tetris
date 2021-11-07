@@ -11,8 +11,15 @@ public class Exit : MonoBehaviour
         Vector3 size=GetComponent<SpriteRenderer>().bounds.size/2;
         new Plane(Vector2.zero, Vector2.one,Vector2.right).Raycast(ray,out float dist);
         transform.position=ray.GetPoint(dist) - size;
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Quit();
     }
     public void OnMouseDown()
+    {
+        Quit();
+    }
+
+    public void Quit()
     {
         Debug.Log("Quiting");
         Application.Quit();
