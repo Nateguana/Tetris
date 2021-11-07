@@ -1,0 +1,12 @@
+Version 0.0.1.0s1 notes
+
+- Escape key now exits game
+
+- Wall kick reimplemented: Now works on larger shapes
+
+- Added a start screen
+
+- Added a scrolling credit screen
+
+- Added a scrolling version notes screen
+
