@@ -9,4 +9,14 @@ public class StartMenu : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void CreditsScreen ()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void VersionNotesScreen ()
+    {
+        SceneManager.LoadScene(3);
+    }
 }
