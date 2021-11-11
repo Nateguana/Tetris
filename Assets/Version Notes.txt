@@ -30,7 +30,3 @@ CONTROLS
 
 - E: rotate tetromino
 
-<<<<<<< Updated upstream
-=======
-- P: pause menu and return to start menu from version notes and credits
->>>>>>> Stashed changes
