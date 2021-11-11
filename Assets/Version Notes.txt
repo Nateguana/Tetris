@@ -8,9 +8,13 @@ Version 0.0.1.0s1 notes
 
 - Added a start screen
 
+- Added pause menu
+
 - Added a scrolling credit screen
 
 - Added a scrolling version notes screen
+
+- Added a way to access the version notes and credits
 
 CONTROLS
 
@@ -26,3 +30,7 @@ CONTROLS
 
 - E: rotate tetromino
 
+<<<<<<< Updated upstream
+=======
+- P: pause menu and return to start menu from version notes and credits
+>>>>>>> Stashed changes
