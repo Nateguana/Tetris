@@ -4,11 +4,25 @@ Version 0.0.1.0s1 notes
 
 - Feature: Previous wall kick algorithm replaced with a new one
 
-- Feature: Due to new algorithm, wall kick now functions with bigger shapes
+- Feature: Due to new algorithm, wall kick now functions with bigger tetrominoes
 
 - Added a start screen
 
 - Added a scrolling credit screen
 
 - Added a scrolling version notes screen
+
+CONTROLS
+
+- A: move tetromino to the left
+
+- D: move tetromino to the right
+
+- S: make tetromino fall faster
+
+- Spacebar: instantly drop tetromino into place
+
+- Q: rotate tetromino
+
+- E: rotate tetromino
 
