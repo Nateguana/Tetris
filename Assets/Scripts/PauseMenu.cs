@@ -8,13 +8,18 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
+    public bool scrollingText = false;
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            if (GameIsPaused)
+            if (scrollingText)
+            {
+                LoadMenu();
+            }
+            else if (GameIsPaused)
             {
                 Resume();
             }
