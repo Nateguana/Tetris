@@ -4,8 +4,8 @@ public class Piece : MonoBehaviour
 {
     public Board board { get; private set; }
     public TetrominoData data { get; private set; }
-    public Vector3Int[] cells { get; private set; }
-    public Vector3Int position { get; private set; }
+    public Vector2Int[] cells { get; private set; }
+    public Vector2Int position { get; private set; }
     public int rotationIndex { get; private set; }
 
     public float stepDelay = 1f;
@@ -16,7 +16,7 @@ public class Piece : MonoBehaviour
     private float moveTime;
     private float lockTime;
 
-    public void Initialize(Board board, Vector3Int position, TetrominoData data)
+    public void Initialize(Board board, Vector2Int position, TetrominoData data)
     {
         this.data = data;
         this.board = board;
@@ -28,11 +28,11 @@ public class Piece : MonoBehaviour
         lockTime = 0f;
 
         if (cells == null) {
-            cells = new Vector3Int[data.cells.Length];
+            cells = new Vector2Int[data.cells.Length];
         }
 
         for (int i = 0; i < cells.Length; i++) {
-            cells[i] = (Vector3Int)data.cells[i];
+            cells[i] = data.cells[i];
         }
     }
 
@@ -121,11 +121,9 @@ public class Piece : MonoBehaviour
 
     private bool Move(Vector2Int translation)
     {
-        Vector3Int newPosition = position;
-        newPosition.x += translation.x;
-        newPosition.y += translation.y;
+        Vector2Int newPosition = position + translation;
 
-        bool valid = board.IsValidPosition(this, newPosition);
+        bool valid = board.IsValidPosition(cells, newPosition);
 
         // Only save the movement if the new position is valid
         if (valid)
@@ -136,7 +134,6 @@ public class Piece : MonoBehaviour
 
         return valid;
     }
-
     private void Rotate(int direction)
     {
         // Store the current rotation in case the rotation fails
@@ -145,24 +142,19 @@ public class Piece : MonoBehaviour
 
         // Rotate all of the cells using a rotation matrix
         rotationIndex = Wrap(rotationIndex + direction, 0, 4);
-        ApplyRotationMatrix(direction);
+        Vector2Int[] newCells = ApplyRotationMatrix(direction);
 
-        // Revert the rotation if the wall kick tests fail
-        if (!TestWallKicks(rotationIndex, direction))
-        {
-            rotationIndex = originalRotation;
-            ApplyRotationMatrix(-direction);
-        }
+        ApplyBounds(newCells);
     }
 
-    private void ApplyRotationMatrix(int direction)
+    private Vector2Int[] ApplyRotationMatrix(int direction)
     {
         float[] matrix = Data.RotationMatrix;
-
+        Vector2Int[] newCells = new Vector2Int[cells.Length];
         // Rotate all of the cells using the rotation matrix
         for (int i = 0; i < cells.Length; i++)
         {
-            Vector3 cell = cells[i];
+            Vector2 cell = cells[i];
 
             int x, y;
 
@@ -183,37 +175,41 @@ public class Piece : MonoBehaviour
                     break;
             }
 
-            cells[i] = new Vector3Int(x, y, 0);
+            newCells[i] = new Vector2Int(x, y);
         }
+        return newCells;
     }
-
-    private bool TestWallKicks(int rotationIndex, int rotationDirection)
+    private void ApplyBounds(Vector2Int[] newCells)
     {
-        int wallKickIndex = GetWallKickIndex(rotationIndex, rotationDirection);
-
-        for (int i = 0; i < data.wallKicks.GetLength(1); i++)
+        Vector2Int newPos = position;
+        RectInt bounds = board.Bounds;
+        bool collision;
+        int cutoff = 1024;
+        do
         {
-            Vector2Int translation = data.wallKicks[wallKickIndex, i];
-
-            if (Move(translation)) {
-                return true;
+           collision = false;
+            for (int i = 0; i < cells.Length; i++)
+            {
+                int x = newCells[i].x + newPos.x;
+                if (x < bounds.xMin)
+                {
+                    newPos += Vector2Int.right;
+                    collision = true;
+                    break;
+                }
+                if (x >= bounds.xMax)
+                {
+                    newPos += Vector2Int.left;
+                    collision = true;
+                    break;
+                }
             }
-        }
+            if (!collision && !board.IsValidPosition(newCells, newPos)) return;
+        } while (collision&& cutoff-->0);
+        cells = newCells;
+        position = newPos;
 
-        return false;
     }
-
-    private int GetWallKickIndex(int rotationIndex, int rotationDirection)
-    {
-        int wallKickIndex = rotationIndex * 2;
-
-        if (rotationDirection < 0) {
-            wallKickIndex--;
-        }
-
-        return Wrap(wallKickIndex, 0, data.wallKicks.GetLength(0));
-    }
-
     private int Wrap(int input, int min, int max)
     {
         if (input < min) {

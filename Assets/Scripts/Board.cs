@@ -8,7 +8,7 @@ public class Board : MonoBehaviour
 
     public TetrominoData[] tetrominoes;
     public Vector2Int boardSize = new Vector2Int(10, 20);
-    public Vector3Int spawnPosition = new Vector3Int(-1, 8, 0);
+    public Vector2Int spawnPosition = new Vector2Int(-1, 8);
 
     public RectInt Bounds {
         get
@@ -40,7 +40,7 @@ public class Board : MonoBehaviour
 
         activePiece.Initialize(this, spawnPosition, data);
 
-        if (!IsValidPosition(activePiece, spawnPosition)) {
+        if (!IsValidPosition(activePiece.cells, spawnPosition)) {
             GameOver();
         } else {
             Set(activePiece);
@@ -58,8 +58,8 @@ public class Board : MonoBehaviour
     {
         for (int i = 0; i < piece.cells.Length; i++)
         {
-            Vector3Int tilePosition = piece.cells[i] + piece.position;
-            tilemap.SetTile(tilePosition, piece.data.tile);
+            Vector2Int tilePosition = piece.cells[i] + piece.position;
+            tilemap.SetTile((Vector3Int)tilePosition, piece.data.tile);
         }
     }
 
@@ -67,27 +67,27 @@ public class Board : MonoBehaviour
     {
         for (int i = 0; i < piece.cells.Length; i++)
         {
-            Vector3Int tilePosition = piece.cells[i] + piece.position;
+            Vector3Int tilePosition = (Vector3Int)(piece.cells[i] + piece.position);
             tilemap.SetTile(tilePosition, null);
         }
     }
 
-    public bool IsValidPosition(Piece piece, Vector3Int position)
+    public bool IsValidPosition(Vector2Int[] cells, Vector2Int position)
     {
         RectInt bounds = Bounds;
 
         // The position is only valid if every cell is valid
-        for (int i = 0; i < piece.cells.Length; i++)
+        for (int i = 0; i < cells.Length; i++)
         {
-            Vector3Int tilePosition = piece.cells[i] + position;
+            Vector2Int tilePosition = cells[i] + position;
 
             // An out of bounds tile is invalid
-            if (!bounds.Contains((Vector2Int)tilePosition)) {
+            if (!bounds.Contains(tilePosition)) {
                 return false;
             }
 
             // A tile already occupies the position, thus invalid
-            if (tilemap.HasTile(tilePosition)) {
+            if (tilemap.HasTile((Vector3Int)tilePosition)) {
                 return false;
             }
         }
