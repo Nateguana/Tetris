@@ -6,7 +6,7 @@ public class Board : MonoBehaviour
     public Tilemap tilemap { get; private set; }
     public Piece activePiece { get; private set; }
 
-    public TetrominoData[] tetrominoes;
+    public Tile[] tiles;
     public Vector2Int boardSize = new Vector2Int(10, 20);
     public Vector2Int spawnPosition = new Vector2Int(-1, 8);
 
@@ -22,10 +22,7 @@ public class Board : MonoBehaviour
     {
         tilemap = GetComponentInChildren<Tilemap>();
         activePiece = GetComponentInChildren<Piece>();
-
-        for (int i = 0; i < tetrominoes.Length; i++) {
-            tetrominoes[i].Initialize();
-        }
+        //tiles=tilemap.
     }
 
     private void Start()
@@ -35,8 +32,8 @@ public class Board : MonoBehaviour
 
     public void SpawnPiece()
     {
-        int random = Random.Range(0, tetrominoes.Length);
-        TetrominoData data = tetrominoes[random];
+        int random = Random.Range(0, Data.tetrominoes.Length);
+        TetrominoData data = Data.tetrominoes[random];
 
         activePiece.Initialize(this, spawnPosition, data);
 
@@ -58,8 +55,8 @@ public class Board : MonoBehaviour
     {
         for (int i = 0; i < piece.cells.Length; i++)
         {
-            Vector2Int tilePosition = piece.cells[i] + piece.position;
-            tilemap.SetTile((Vector3Int)tilePosition, piece.data.tile);
+            Vector2Int tilePosition = piece.cells[i].positon + piece.position;
+            tilemap.SetTile((Vector3Int)tilePosition, tiles[piece.data.tile]);
         }
     }
 
@@ -67,19 +64,19 @@ public class Board : MonoBehaviour
     {
         for (int i = 0; i < piece.cells.Length; i++)
         {
-            Vector3Int tilePosition = (Vector3Int)(piece.cells[i] + piece.position);
+            Vector3Int tilePosition = (Vector3Int)(piece.cells[i].positon + piece.position);
             tilemap.SetTile(tilePosition, null);
         }
     }
 
-    public bool IsValidPosition(Vector2Int[] cells, Vector2Int position)
+    public bool IsValidPosition(Cell[] cells, Vector2Int position)
     {
         RectInt bounds = Bounds;
 
         // The position is only valid if every cell is valid
         for (int i = 0; i < cells.Length; i++)
         {
-            Vector2Int tilePosition = cells[i] + position;
+            Vector2Int tilePosition = cells[i].positon + position;
 
             // An out of bounds tile is invalid
             if (!bounds.Contains(tilePosition)) {

@@ -8,13 +8,12 @@ public class Ghost : MonoBehaviour
     public Piece trackingPiece;
 
     public Tilemap tilemap { get; private set; }
-    public Vector2Int[] cells { get; private set; }
+    public Cell[] cells { get; private set; }
     public Vector2Int position { get; private set; }
 
     private void Awake()
     {
         tilemap = GetComponentInChildren<Tilemap>();
-        cells = new Vector2Int[4];
     }
 
     private void LateUpdate()
@@ -27,35 +26,34 @@ public class Ghost : MonoBehaviour
 
     private void Clear()
     {
+        if(cells!=null)
         for (int i = 0; i < cells.Length; i++)
         {
-            Vector3Int tilePosition = (Vector3Int)(cells[i] + position);
+            Vector3Int tilePosition = (Vector3Int)(cells[i].positon + position);
             tilemap.SetTile(tilePosition, null);
         }
     }
 
     private void Copy()
     {
-        for (int i = 0; i < cells.Length; i++) {
-            cells[i] = trackingPiece.cells[i];
-        }
+        cells = (Cell[]) trackingPiece.cells.Clone();
     }
 
     private void Drop()
     {
-        Vector2Int position = trackingPiece.position;
+        Vector2Int pos = trackingPiece.position;
 
-        int current = position.y;
+        int current = pos.y;
         int bottom = -mainBoard.boardSize.y / 2 - 1;
 
         mainBoard.Clear(trackingPiece);
 
         for (int row = current; row >= bottom; row--)
         {
-            position.y = row;
+            pos.y = row;
 
-            if (mainBoard.IsValidPosition(trackingPiece.cells, position)) {
-                this.position = position;
+            if (mainBoard.IsValidPosition(trackingPiece.cells, pos)) {
+                position = pos;
             } else {
                 break;
             }
@@ -68,7 +66,7 @@ public class Ghost : MonoBehaviour
     {
         for (int i = 0; i < cells.Length; i++)
         {
-            Vector3Int tilePosition = (Vector3Int)(cells[i] + position);
+            Vector3Int tilePosition = (Vector3Int)(cells[i].positon + position);
             tilemap.SetTile(tilePosition, tile);
         }
     }

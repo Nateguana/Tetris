@@ -1,22 +1,27 @@
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public enum Tetromino
-{
-    I, J, L, O, S, T, Z
-}
-
-[System.Serializable]
+[Serializable]
 public struct TetrominoData
 {
-    public Tile tile;
-    public Tetromino tetromino;
 
-    public Vector2Int[] cells { get; private set; }
+    public readonly string name;
+    public readonly TetrominoRotation rotationType;
+    public readonly Vector2Int[] cells;
+    public readonly byte tile;
 
-    public void Initialize()
+    public TetrominoData(string name, byte tile, Vector2Int[] cells, TetrominoRotation rotationType=TetrominoRotation.regular)
     {
-        cells = Data.Cells[tetromino];
+        this.name = name;
+        this.cells = cells;
+        this.rotationType = rotationType;
+        this.tile = tile;
     }
-
+}
+public enum TetrominoRotation
+{
+    regular,
+    offset,
+    none
 }
