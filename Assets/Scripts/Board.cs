@@ -3,6 +3,7 @@ using UnityEngine.Tilemaps;
 
 public class Board : MonoBehaviour
 {
+    public bool original;
     public Tilemap tilemap { get; private set; }
     public Piece activePiece { get; private set; }
 
@@ -22,7 +23,6 @@ public class Board : MonoBehaviour
     {
         tilemap = GetComponentInChildren<Tilemap>();
         activePiece = GetComponentInChildren<Piece>();
-        //tiles=tilemap.
     }
 
     private void Start()
@@ -32,8 +32,9 @@ public class Board : MonoBehaviour
 
     public void SpawnPiece()
     {
-        int random = Random.Range(0, Data.tetrominoes.Length);
-        TetrominoData data = Data.tetrominoes[random];
+        int pieceNumber = original ? Data.originalPieces: Data.tetrominoes.Length;
+
+        TetrominoData data = Data.tetrominoes[Random.Range(0, pieceNumber)];
 
         activePiece.Initialize(this, spawnPosition, data);
 

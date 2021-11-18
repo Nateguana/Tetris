@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Piece : MonoBehaviour
@@ -27,12 +28,9 @@ public class Piece : MonoBehaviour
         moveTime = Time.time + moveDelay;
         lockTime = 0f;
 
-        if (cells == null)
-        {
-            cells = new Cell[data.cells.Length];
-        }
+        cells = new Cell[data.cells.Length];
 
-        for (int i = 0; i < cells.Length; i++)
+        for (int i = 0; i < data.cells.Length; i++)
         {
             cells[i] = new Cell(data.cells[i]);
         }
@@ -171,20 +169,19 @@ public class Piece : MonoBehaviour
         {
             Vector2Int newCell = cells[i].positon;
             Vector2 cell = newCell;
-
+            Func<float, int> func = Mathf.RoundToInt;
             switch (data.rotationType)
             {
                 case TetrominoRotation.offset:
-                    cell.x -= 0.5f;
-                    cell.y -= 0.5f;
+                    cell -= Vector2.one / 2;
+                    func = Mathf.CeilToInt;
                     goto case TetrominoRotation.regular;
                 case TetrominoRotation.regular:
                     newCell = new Vector2Int(
-                    Mathf.RoundToInt((cell.x * matrix[0] * direction) + (cell.y * matrix[1] * direction)),
-                    Mathf.RoundToInt((cell.x * matrix[2] * direction) + (cell.y * matrix[3] * direction)));
+                    func((cell.x * matrix[0] * direction) + (cell.y * matrix[1] * direction)),
+                    func((cell.x * matrix[2] * direction) + (cell.y * matrix[3] * direction)));
                     break;
             }
-
             newCells[i] = new Cell(newCell);
         }
         return newCells;

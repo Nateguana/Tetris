@@ -9,7 +9,7 @@ public static class Data
     public static readonly float[] RotationMatrix = new float[] { cos, sin, -sin, cos };
 
     private static Vector2Int V(int x, int y) => new Vector2Int(x, y);
-
+    public const int originalPieces = 7;
     public static readonly TetrominoData[] tetrominoes = new TetrominoData[] {
         new TetrominoData("I", 4, new Vector2Int[] { V(-1, 1), V( 0, 1), V( 1, 1), V( 2, 1) },TetrominoRotation.offset),
         new TetrominoData("O", 2, new Vector2Int[] { V( 0, 1), V( 1, 1), V( 0, 0), V( 1, 0) },TetrominoRotation.none),
