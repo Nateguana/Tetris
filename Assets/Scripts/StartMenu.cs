@@ -20,6 +20,11 @@ public class StartMenu : MonoBehaviour
         SceneManager.LoadScene(3);
     }
 
+    public void OriginalGame ()
+    {
+        SceneManager.LoadScene(4);
+    }
+
     public void ClickSound ()
     {
         FindObjectOfType<AudioManager>().Play("ClickPlaceholder");
