@@ -19,4 +19,19 @@ public class StartMenu : MonoBehaviour
     {
         SceneManager.LoadScene(3);
     }
+
+    public void ClickSound ()
+    {
+        FindObjectOfType<AudioManager>().Play("ClickPlaceholder");
+    }
+
+        public void ClickSound2 ()
+    {
+        FindObjectOfType<AudioManager>().Play("Click2Placeholder");
+    }
+
+        public void ClickSound3 ()
+    {
+        FindObjectOfType<AudioManager>().Play("Click3Placeholder");
+    }
 }
