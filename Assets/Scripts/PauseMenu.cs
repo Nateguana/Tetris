@@ -10,6 +10,11 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public bool scrollingText = false;
 
+    void Start()
+    {
+        Init();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -31,11 +36,16 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    public void Resume()
+    public void Init()
     {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+    }
+
+    public void Resume()
+    {
+        Init();
          FindObjectOfType<AudioManager>().Play("ClickPlaceholder"); // Placeholder
     }
 
@@ -49,18 +59,21 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu()
     {
-        SceneManager.LoadScene(0);
+        Init();
+        SceneManager.LoadScene(1);
         FindObjectOfType<AudioManager>().Play("Click2Placeholder"); // Placeholder
     }
 
     public void CreditsScreen()
     {
+        Init();
         SceneManager.LoadScene(2);
         FindObjectOfType<AudioManager>().Play("Click2Placeholder"); // Placeholder
     }
 
     public void VersionNotesScreen()
     {
+        Init();
         SceneManager.LoadScene(3);
         FindObjectOfType<AudioManager>().Play("Click3Placeholder"); // Placeholder
     }
