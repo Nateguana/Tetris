@@ -107,8 +107,10 @@ public class Board : MonoBehaviour
             // because the tiles above will fall down when a row is cleared
             if (IsLineFull(row)) {
                 LineClear(row);
+                FindObjectOfType<AudioManager>().Play("ClearPlaceholder"); //Placeholder
             } else {
                 row++;
+                FindObjectOfType<AudioManager>().Play("LandPlaceholder"); // Placeholder
             }
         }
     }

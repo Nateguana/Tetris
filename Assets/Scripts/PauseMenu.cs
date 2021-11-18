@@ -18,6 +18,7 @@ public class PauseMenu : MonoBehaviour
             if (scrollingText)
             {
                 LoadMenu();
+                FindObjectOfType<AudioManager>().Play("Click2Placeholder"); // Placeholder
             }
             else if (GameIsPaused)
             {
@@ -35,6 +36,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+         FindObjectOfType<AudioManager>().Play("ClickPlaceholder"); // Placeholder
     }
 
     void Pause()
@@ -42,20 +44,24 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+        FindObjectOfType<AudioManager>().Play("Click2Placeholder"); // Placeholder
     }
 
     public void LoadMenu()
     {
         SceneManager.LoadScene(0);
+        FindObjectOfType<AudioManager>().Play("Click2Placeholder"); // Placeholder
     }
 
     public void CreditsScreen()
     {
         SceneManager.LoadScene(2);
+        FindObjectOfType<AudioManager>().Play("Click2Placeholder"); // Placeholder
     }
 
     public void VersionNotesScreen()
     {
         SceneManager.LoadScene(3);
+        FindObjectOfType<AudioManager>().Play("Click3Placeholder"); // Placeholder
     }
 }
