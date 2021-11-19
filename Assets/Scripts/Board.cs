@@ -5,7 +5,6 @@ public class Board : MonoBehaviour
 {
     public static bool original;
     public bool isOriginal;
-    public new AudioManager audio;
     public Tilemap tilemap { get; private set; }
     public Piece activePiece { get; private set; }
 
@@ -26,7 +25,6 @@ public class Board : MonoBehaviour
         original = isOriginal;
         tilemap = GetComponentInChildren<Tilemap>();
         activePiece = GetComponentInChildren<Piece>();
-        audio = FindObjectOfType<AudioManager>();
     }
 
     private void Start()
@@ -52,7 +50,7 @@ public class Board : MonoBehaviour
     public void GameOver()
     {
         tilemap.ClearAllTiles();
-        audio?.Play("GameOverPlaceholder"); //Placeholder
+        AudioManager.Play("GameOverPlaceholder"); //Placeholder
 
         // Do anything else you want on game over here..
     }
@@ -110,10 +108,11 @@ public class Board : MonoBehaviour
             // because the tiles above will fall down when a row is cleared
             if (IsLineFull(row)) {
                 LineClear(row);
-                audio.Play("ClearPlaceholder"); //Placeholder
+               AudioManager.Play("ClearPlaceholder"); //Placeholder
             } else {
                 row++;
-                audio.Play("LandPlaceholder"); // Placeholder
+                AudioManager.Play("LandPlaceholder"); // Placeholder
+                AudioManager.Play("LandPlaceholder"); // Placeholder
             }
         }
     }

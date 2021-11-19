@@ -36,7 +36,7 @@ public class Ghost : MonoBehaviour
 
     private void Copy()
     {
-        cells = (Cell[]) trackingPiece.cells?.Clone();
+        cells = (Cell[]) trackingPiece.cells.Clone();
     }
 
     private void Drop()
