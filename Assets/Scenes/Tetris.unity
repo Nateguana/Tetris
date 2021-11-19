@@ -747,6 +747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4fe201741a0f14c82a9ce960b9f5e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  original: 0
   tiles:
   - {fileID: 11400000, guid: be0a34e2a842ae742b4fa8541a5f9fcf, type: 2}
   - {fileID: 11400000, guid: 89eae29ecf56ea14c8b3927213a00066, type: 2}
@@ -937,7 +938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6680098205155411027, guid: cc54d1837c9d7a84394ce2367437a3b3, type: 3}
       propertyPath: sounds.Array.size
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6680098205155411027, guid: cc54d1837c9d7a84394ce2367437a3b3, type: 3}
       propertyPath: sounds.Array.data[1].clip
@@ -972,6 +973,22 @@ PrefabInstance:
       value: Click3Placeholder
       objectReference: {fileID: 0}
     - target: {fileID: 6680098205155411027, guid: cc54d1837c9d7a84394ce2367437a3b3, type: 3}
+      propertyPath: sounds.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 477b7af2e48d7e240a550349cd20b4c3, type: 3}
+    - target: {fileID: 6680098205155411027, guid: cc54d1837c9d7a84394ce2367437a3b3, type: 3}
+      propertyPath: sounds.Array.data[5].name
+      value: GameOverPlaceholder
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680098205155411027, guid: cc54d1837c9d7a84394ce2367437a3b3, type: 3}
+      propertyPath: sounds.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c65cd0ece9251b488a2bf579f64f88b, type: 3}
+    - target: {fileID: 6680098205155411027, guid: cc54d1837c9d7a84394ce2367437a3b3, type: 3}
+      propertyPath: sounds.Array.data[6].name
+      value: PlaceHolderBackground
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680098205155411027, guid: cc54d1837c9d7a84394ce2367437a3b3, type: 3}
       propertyPath: sounds.Array.data[1].pitch
       value: 1
       objectReference: {fileID: 0}
@@ -988,6 +1005,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6680098205155411027, guid: cc54d1837c9d7a84394ce2367437a3b3, type: 3}
+      propertyPath: sounds.Array.data[5].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680098205155411027, guid: cc54d1837c9d7a84394ce2367437a3b3, type: 3}
+      propertyPath: sounds.Array.data[6].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680098205155411027, guid: cc54d1837c9d7a84394ce2367437a3b3, type: 3}
       propertyPath: sounds.Array.data[1].volume
       value: 1
       objectReference: {fileID: 0}
@@ -1001,6 +1026,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6680098205155411027, guid: cc54d1837c9d7a84394ce2367437a3b3, type: 3}
       propertyPath: sounds.Array.data[4].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680098205155411027, guid: cc54d1837c9d7a84394ce2367437a3b3, type: 3}
+      propertyPath: sounds.Array.data[5].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680098205155411027, guid: cc54d1837c9d7a84394ce2367437a3b3, type: 3}
+      propertyPath: sounds.Array.data[6].volume
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -48,6 +48,7 @@ public class Board : MonoBehaviour
     public void GameOver()
     {
         tilemap.ClearAllTiles();
+        FindObjectOfType<AudioManager>().Play("GameOverPlaceholder"); //Placeholder
 
         // Do anything else you want on game over here..
     }
