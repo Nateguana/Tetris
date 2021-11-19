@@ -3,7 +3,9 @@ using UnityEngine.Tilemaps;
 
 public class Board : MonoBehaviour
 {
-    public bool original;
+    public static bool original;
+    public bool isOriginal;
+    public new AudioManager audio;
     public Tilemap tilemap { get; private set; }
     public Piece activePiece { get; private set; }
 
@@ -21,8 +23,10 @@ public class Board : MonoBehaviour
 
     private void Awake()
     {
+        original = isOriginal;
         tilemap = GetComponentInChildren<Tilemap>();
         activePiece = GetComponentInChildren<Piece>();
+        audio = FindObjectOfType<AudioManager>();
     }
 
     private void Start()
@@ -48,7 +52,7 @@ public class Board : MonoBehaviour
     public void GameOver()
     {
         tilemap.ClearAllTiles();
-        FindObjectOfType<AudioManager>().Play("GameOverPlaceholder"); //Placeholder
+        audio?.Play("GameOverPlaceholder"); //Placeholder
 
         // Do anything else you want on game over here..
     }
@@ -106,10 +110,10 @@ public class Board : MonoBehaviour
             // because the tiles above will fall down when a row is cleared
             if (IsLineFull(row)) {
                 LineClear(row);
-                FindObjectOfType<AudioManager>().Play("ClearPlaceholder"); //Placeholder
+                audio.Play("ClearPlaceholder"); //Placeholder
             } else {
                 row++;
-                FindObjectOfType<AudioManager>().Play("LandPlaceholder"); // Placeholder
+                audio.Play("LandPlaceholder"); // Placeholder
             }
         }
     }
