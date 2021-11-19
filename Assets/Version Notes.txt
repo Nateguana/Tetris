@@ -1,3 +1,22 @@
+Version 0.0.2.0s2 notes
+
+- Added title screen
+
+- Added a way to navigate to our first original build of Tetris
+
+- Zigurous splash screen added
+
+- Feature: Added a new Tetromino "Big Block"
+
+- Added placeholder sounds to most, if not all, interactions
+
+- Added placeholder background music
+
+- Fixed bug that prevented game from working after navigating
+  to the start screen from the pause menu and beginning a new game
+
+- 
+
 Version 0.0.1.0s1 notes
 
 - Escape key now exits game
