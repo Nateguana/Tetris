@@ -48,4 +48,6 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 44ca60c35cb17c041b3088d434f16e4f, type: 3}
     volume: 1
     pitch: 1
+    loop: 0
     source: {fileID: 0}
+  audioMixerGroup: {fileID: 24300002, guid: 61ac926af96d8e24db4b9402d56b625a, type: 2}
