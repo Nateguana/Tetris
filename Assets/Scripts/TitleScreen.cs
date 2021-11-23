@@ -8,7 +8,7 @@ public class TitleScreen : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetButtonDown(KeyCode.JoystickButton0))
+        if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("joystick button 0"))
         {
             SceneManager.LoadScene(1);
         }
