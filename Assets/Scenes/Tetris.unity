@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4005288109007685535, guid: 0e855f04848924a478dde7efc8327fc3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4347041712189649250, guid: 0e855f04848924a478dde7efc8327fc3, type: 3}
       propertyPath: m_Name
       value: PauseMenu
@@ -216,6 +220,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4347041712189649254, guid: 0e855f04848924a478dde7efc8327fc3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225884748174978638, guid: 0e855f04848924a478dde7efc8327fc3, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
