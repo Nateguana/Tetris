@@ -12,6 +12,8 @@ public class Board : MonoBehaviour
     public Vector2Int boardSize = new Vector2Int(10, 20);
     public Vector2Int spawnPosition = new Vector2Int(-1, 8);
 
+    [SerializeField] private Flashing flashEffect;
+
     public RectInt Bounds {
         get
         {
@@ -109,6 +111,7 @@ public class Board : MonoBehaviour
             if (IsLineFull(row)) {
                 LineClear(row);
                AudioManager.Play("ClearPlaceholder"); //Placeholder
+               flashEffect.Flash();
             } else {
                 row++;
                 AudioManager.Play("LandPlaceholder"); // Placeholder
