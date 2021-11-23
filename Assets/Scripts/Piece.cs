@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class Piece : MonoBehaviour
@@ -49,13 +50,15 @@ public class Piece : MonoBehaviour
         {
             Rotate(-1);
         }
-        else if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton5))
+        else if (Input.GetKeyDown(KeyCode.E) || 
+            (Input.GetJoystickNames().Any() && Input.GetKeyDown(KeyCode.JoystickButton5)))
         {
             Rotate(1);
         }
 
         // Handle hard drop
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0))
+        if (Input.GetKeyDown(KeyCode.Space) ||
+            (Input.GetJoystickNames().Any() && Input.GetKeyDown(KeyCode.JoystickButton0)))
         {
             HardDrop();
         }
