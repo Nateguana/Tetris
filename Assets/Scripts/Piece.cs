@@ -46,7 +46,8 @@ public class Piece : MonoBehaviour
         lockTime += Time.deltaTime;
 
         // Handle rotation
-        if (Input.GetKeyDown(KeyCode.Q) || Input.anyKeyDown)//Input.GetKeyDown(KeyCode.JoystickButton4))
+        if (Input.GetKeyDown(KeyCode.Q) || 
+            (Input.GetJoystickNames().Any() && Input.GetKeyDown(KeyCode.JoystickButton4)))
         {
             Rotate(-1);
         }
