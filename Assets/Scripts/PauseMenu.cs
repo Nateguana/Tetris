@@ -67,14 +67,14 @@ public class PauseMenu : MonoBehaviour
     public void CreditsScreen()
     {
         Init();
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
         AudioManager.Play("Click2Placeholder"); // Placeholder
     }
 
     public void VersionNotesScreen()
     {
         Init();
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
         AudioManager.Play("Click3Placeholder"); // Placeholder
     }
 }
