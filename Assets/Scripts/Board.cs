@@ -14,7 +14,8 @@ public class Board : MonoBehaviour
 
     [SerializeField] private Flashing flashEffect;
 
-    public RectInt Bounds {
+    public RectInt Bounds
+    {
         get
         {
             Vector2Int position = new Vector2Int(-boardSize.x / 2, -boardSize.y / 2);
@@ -36,15 +37,18 @@ public class Board : MonoBehaviour
 
     public void SpawnPiece()
     {
-        int pieceNumber = original ? Data.originalPieces: Data.tetrominoes.Length;
+        int pieceNumber = original ? Data.originalPieces : Data.tetrominoes.Length;
 
         TetrominoData data = Data.tetrominoes[Random.Range(0, pieceNumber)];
 
         activePiece.Initialize(this, spawnPosition, data);
 
-        if (!IsValidPosition(activePiece.cells, spawnPosition)) {
+        if (!IsValidPosition(activePiece.cells, spawnPosition))
+        {
             GameOver();
-        } else {
+        }
+        else
+        {
             Set(activePiece);
         }
     }
@@ -85,12 +89,14 @@ public class Board : MonoBehaviour
             Vector2Int tilePosition = cells[i].positon + position;
 
             // An out of bounds tile is invalid
-            if (!bounds.Contains(tilePosition)) {
+            if (!bounds.Contains(tilePosition))
+            {
                 return false;
             }
 
             // A tile already occupies the position, thus invalid
-            if (tilemap.HasTile((Vector3Int)tilePosition)) {
+            if (tilemap.HasTile((Vector3Int)tilePosition))
+            {
                 return false;
             }
         }
@@ -108,11 +114,15 @@ public class Board : MonoBehaviour
         {
             // Only advance to the next row if the current is not cleared
             // because the tiles above will fall down when a row is cleared
-            if (IsLineFull(row)) {
+            if (IsLineFull(row))
+            {
                 LineClear(row);
-               AudioManager.Play("ClearPlaceholder"); //Placeholder
-               flashEffect.Flash();
-            } else {
+                AudioManager.Play("ClearPlaceholder"); //Placeholder
+                if (!original)
+                    flashEffect.Flash();
+            }
+            else
+            {
                 row++;
                 AudioManager.Play("LandPlaceholder"); // Placeholder
                 AudioManager.Play("LandPlaceholder"); // Placeholder
@@ -129,7 +139,8 @@ public class Board : MonoBehaviour
             Vector3Int position = new Vector3Int(col, row, 0);
 
             // The line is not full if a tile is missing
-            if (!tilemap.HasTile(position)) {
+            if (!tilemap.HasTile(position))
+            {
                 return false;
             }
         }
