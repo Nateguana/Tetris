@@ -275,6 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 61ac926af96d8e24db4b9402d56b625a, type: 2}
+  slider: {fileID: 3715689002469873883}
 --- !u!1 &2273993846490290303
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,10 +359,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 4005288109007685535}
   m_HandleRect: {fileID: 8225884748174978638}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
