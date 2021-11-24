@@ -1,3 +1,13 @@
+Version 0.1.0.0s3 notes
+
+- Added audio settings to the game
+  which can be navigated to from the menu
+
+- Added the backend webserver for a leaderboard
+  at this link http://gamestream.stream/swagger/index.html
+
+- The background now flashes whenever a tile is cleared
+
 Version 0.0.2.0s2 notes
 
 - Added title screen
@@ -14,8 +24,6 @@ Version 0.0.2.0s2 notes
 
 - Fixed bug that prevented game from working after navigating
   to the start screen from the pause menu and beginning a new game
-
-- 
 
 Version 0.0.1.0s1 notes
 
