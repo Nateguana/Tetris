@@ -26,7 +26,7 @@ public class StartMenu : MonoBehaviour
 
     void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow) || GetNegAxisDown("Vertical"))
+        if (GetNegAxisDown("Vertical"))
         {
             selectedButton += 1;
             if (selectedButton > numOfButtons)
