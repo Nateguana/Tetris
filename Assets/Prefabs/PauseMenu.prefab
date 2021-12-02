@@ -354,6 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 61ac926af96d8e24db4b9402d56b625a, type: 2}
+  slider: {fileID: 3715689002469873883}
   volumeSlider: {fileID: 2273993846490290303}
   backButton: {fileID: 6463146856394085541}
 --- !u!1 &2273993846490290303

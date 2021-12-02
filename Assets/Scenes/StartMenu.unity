@@ -1313,6 +1313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 61ac926af96d8e24db4b9402d56b625a, type: 2}
+  slider: {fileID: 1908568002}
   volumeSlider: {fileID: 1908568000}
   backButton: {fileID: 1404500898}
 --- !u!1 &1144367093

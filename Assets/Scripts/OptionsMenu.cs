@@ -9,14 +9,6 @@ public class OptionsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
     public Slider slider;
-
-    void Start()
-    {
-        float volume;
-        bool result = audioMixer.GetFloat("Volume", out volume);
-        slider.value = Mathf.Pow(10, volume) / 20.0f;
-    }
-
     public GameObject volumeSlider;
     public GameObject backButton;
 
@@ -24,8 +16,12 @@ public class OptionsMenu : MonoBehaviour
     private int selectedButton;
     private bool previousAxisState;
 
-    void Start ()
+    void Start()
     {
+        float volume;
+        bool result = audioMixer.GetFloat("Volume", out volume);
+        slider.value = Mathf.Pow(10, volume) / 20.0f;
+
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(volumeSlider);
         selectedButton = 1;
