@@ -24,6 +24,7 @@ public class ScrollText : MonoBehaviour
     }
     private void Scroll(Vector3 currentTop, Vector2 extents)
     {
+        //if (!Input.GetJoystickNames().Any())      idk if can work
         float pos = Mathf.Clamp(Input.mousePosition.y / Screen.height * 2 - 1, -1, 1);
         float sqrtPos = pos * pos;
 

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class Piece : MonoBehaviour
@@ -45,17 +46,20 @@ public class Piece : MonoBehaviour
         lockTime += Time.deltaTime;
 
         // Handle rotation
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) || 
+            (Input.GetJoystickNames().Any() && Input.GetKeyDown(KeyCode.JoystickButton4)))
         {
             Rotate(-1);
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetKeyDown(KeyCode.E) || 
+            (Input.GetJoystickNames().Any() && Input.GetKeyDown(KeyCode.JoystickButton5)))
         {
             Rotate(1);
         }
 
         // Handle hard drop
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) ||
+            (Input.GetJoystickNames().Any() && Input.GetKeyDown(KeyCode.JoystickButton0)))
         {
             HardDrop();
         }
@@ -81,17 +85,17 @@ public class Piece : MonoBehaviour
         moveTime = Time.time + moveDelay;
 
         // Soft drop movement
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) || Input.GetAxis("Vertical") < 0)
         {
             Move(Vector2Int.down);
         }
 
         // Left/right movement
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || Input.GetAxis("Horizontal") < 0)
         {
             Move(Vector2Int.left);
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) || Input.GetAxis("Horizontal") > 0)
         {
             Move(Vector2Int.right);
         }
@@ -103,7 +107,7 @@ public class Piece : MonoBehaviour
 
         // Do not move down if the player is already holding down
         // otherwise it can cause a double movement
-        if (!Input.GetKey(KeyCode.S))
+        if (!Input.GetKey(KeyCode.S) || Input.GetAxis("Vertical") < 0)
         {
             Move(Vector2Int.down);
         }
