@@ -12,7 +12,12 @@ public class LeaderBoard : ScrollText
     protected override void Start()
     {
         txt = GetComponent<TMPro.TMP_Text>();
-        StartCoroutine(Mathx.GetRequest(URL, makeBoard, ()=>txt.text = "Network Error"));
+        StartCoroutine(Delay());
+    }
+    private IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(.25f);
+        yield return Mathx.GetRequest(URL, makeBoard, () => txt.text = "Network Error");
     }
     private void makeBoard(string text)
     {
