@@ -1,4 +1,4 @@
-Version 0.2.0.0s3 notes
+Version 0.2.0.0s4 notes
 
 - Added a leaderboard that is accesible
   from the main menu and the pause menu
@@ -7,7 +7,7 @@ Version 0.2.0.0s3 notes
 
 - The screen now shakes when a tile is cleared
 
-- Created a webpage for the leaderboards at
+- Created a webpage for the leaderboard at
   https://gamestream.stream/leaderboard
 
 Version 0.1.0.0s3 notes
