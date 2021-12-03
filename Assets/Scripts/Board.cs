@@ -8,6 +8,7 @@ public class Board : MonoBehaviour
     public Tilemap tilemap { get; private set; }
     public Piece activePiece { get; private set; }
     public ScreenShake screenShake;
+    public GameObject sendScoreScreen;
 
     public Tile[] tiles;
     public Vector2Int boardSize = new Vector2Int(10, 20);
@@ -33,6 +34,7 @@ public class Board : MonoBehaviour
 
     private void Start()
     {
+        Piece.gameOver = false;
         SpawnPiece();
     }
 
@@ -59,7 +61,9 @@ public class Board : MonoBehaviour
         tilemap.ClearAllTiles();
         AudioManager.Play("GameOverPlaceholder"); //Placeholder
 
-        // Do anything else you want on game over here..
+        Time.timeScale = 0f;
+        Piece.gameOver = true;
+        sendScoreScreen.SetActive(true);
     }
 
     public void Set(Piece piece)

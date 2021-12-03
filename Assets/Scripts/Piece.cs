@@ -18,6 +18,8 @@ public class Piece : MonoBehaviour
     private float moveTime;
     private float lockTime;
 
+    public static bool gameOver = false;
+
     public void Initialize(Board board, Vector2Int position, TetrominoData data)
     {
         this.data = data;
@@ -39,45 +41,48 @@ public class Piece : MonoBehaviour
 
     private void Update()
     {
-        board.Clear(this);
-
-        // We use a timer to allow the player to make adjustments to the piece
-        // before it locks in place
-        lockTime += Time.deltaTime;
-
-        // Handle rotation
-        if (Input.GetKeyDown(KeyCode.Q) || 
-            (Input.GetJoystickNames().Any() && Input.GetKeyDown(KeyCode.JoystickButton4)))
+        if (!gameOver)
         {
-            Rotate(-1);
-        }
-        else if (Input.GetKeyDown(KeyCode.E) || 
-            (Input.GetJoystickNames().Any() && Input.GetKeyDown(KeyCode.JoystickButton5)))
-        {
-            Rotate(1);
-        }
+            board.Clear(this);
 
-        // Handle hard drop
-        if (Input.GetKeyDown(KeyCode.Space) ||
-            (Input.GetJoystickNames().Any() && Input.GetKeyDown(KeyCode.JoystickButton0)))
-        {
-            HardDrop();
-        }
+            // We use a timer to allow the player to make adjustments to the piece
+            // before it locks in place
+            lockTime += Time.deltaTime;
 
-        // Allow the player to hold movement keys but only after a move delay
-        // so it does not move too fast
-        if (Time.time > moveTime)
-        {
-            HandleMoveInputs();
-        }
+            // Handle rotation
+            if (Input.GetKeyDown(KeyCode.Q) ||
+                (Input.GetJoystickNames().Any() && Input.GetKeyDown(KeyCode.JoystickButton4)))
+            {
+                Rotate(-1);
+            }
+            else if (Input.GetKeyDown(KeyCode.E) ||
+                (Input.GetJoystickNames().Any() && Input.GetKeyDown(KeyCode.JoystickButton5)))
+            {
+                Rotate(1);
+            }
 
-        // Advance the piece to the next row every x seconds
-        if (Time.time > stepTime)
-        {
-            Step();
-        }
+            // Handle hard drop
+            if (Input.GetKeyDown(KeyCode.Space) ||
+                (Input.GetJoystickNames().Any() && Input.GetKeyDown(KeyCode.JoystickButton0)))
+            {
+                HardDrop();
+            }
 
-        board.Set(this);
+            // Allow the player to hold movement keys but only after a move delay
+            // so it does not move too fast
+            if (Time.time > moveTime)
+            {
+                HandleMoveInputs();
+            }
+
+            // Advance the piece to the next row every x seconds
+            if (Time.time > stepTime)
+            {
+                Step();
+            }
+
+            board.Set(this);
+        }
     }
 
     private void HandleMoveInputs()
