@@ -7,9 +7,9 @@ public class ScrollText : MonoBehaviour
     public float maxSpeed;
     public float extraZoom;
     public TextAsset text;
-    private TMPro.TMP_Text txt;
+    protected TMPro.TMP_Text txt;
     public int reset = 2;
-    void Start()
+    protected virtual void Start()
     {
         txt = GetComponent<TMPro.TMP_Text>();
         txt.text = text != null ? text.text : null ?? "Could not be loaded";
