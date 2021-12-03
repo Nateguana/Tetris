@@ -7,6 +7,7 @@ public class Board : MonoBehaviour
     public bool isOriginal;
     public Tilemap tilemap { get; private set; }
     public Piece activePiece { get; private set; }
+    public ScreenShake screenShake;
 
     public Tile[] tiles;
     public Vector2Int boardSize = new Vector2Int(10, 20);
@@ -120,6 +121,7 @@ public class Board : MonoBehaviour
                 AudioManager.Play("ClearPlaceholder"); //Placeholder
                 if (!original)
                     flashEffect.Flash();
+                    StartCoroutine(screenShake.Shake(.1f, .5f));
             }
             else
             {
