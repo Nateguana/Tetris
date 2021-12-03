@@ -1,3 +1,15 @@
+Version 0.2.0.0s3 notes
+
+- Added a leaderboard that is accesible
+  from the main menu and the pause menu
+
+- Added controller support
+
+- The screen now shakes when a tile is cleared
+
+- Created a webpage for the leaderboards at
+  https://gamestream.stream/leaderboard
+
 Version 0.1.0.0s3 notes
 
 - Added audio settings to the game
