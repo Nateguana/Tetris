@@ -120,8 +120,10 @@ public class Board : MonoBehaviour
                 LineClear(row);
                 AudioManager.Play("ClearPlaceholder"); //Placeholder
                 if (!original)
+                {
                     flashEffect.Flash();
                     StartCoroutine(screenShake.Shake(.1f, .5f));
+                }
             }
             else
             {
