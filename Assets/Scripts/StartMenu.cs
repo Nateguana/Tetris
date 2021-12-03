@@ -8,11 +8,12 @@ public class StartMenu : MonoBehaviour
 {
     public GameObject playButton;
     public GameObject optionsButton;
+    public GameObject leaderboardButton;
     public GameObject creditsButton;
     public GameObject versionNotesButton;
     public GameObject originalGameButton;
 
-    private int numOfButtons = 5;
+    private int numOfButtons = 6;
     private int selectedButton;
     private bool previousAxisState;
 
@@ -45,12 +46,15 @@ public class StartMenu : MonoBehaviour
                     EventSystem.current.SetSelectedGameObject(optionsButton);
                     break;
                 case 3:
-                    EventSystem.current.SetSelectedGameObject(creditsButton);
+                    EventSystem.current.SetSelectedGameObject(leaderboardButton);
                     break;
                 case 4:
-                    EventSystem.current.SetSelectedGameObject(versionNotesButton);
+                    EventSystem.current.SetSelectedGameObject(creditsButton);
                     break;
                 case 5:
+                    EventSystem.current.SetSelectedGameObject(versionNotesButton);
+                    break;
+                case 6:
                     EventSystem.current.SetSelectedGameObject(originalGameButton);
                     break;
             }
@@ -75,6 +79,11 @@ public class StartMenu : MonoBehaviour
     public void OriginalGame ()
     {
         SceneManager.LoadScene(5);
+    }
+
+    public void LeaderboardScreen()
+    {
+        SceneManager.LoadScene(6);
     }
 
     public void ClickSound ()
