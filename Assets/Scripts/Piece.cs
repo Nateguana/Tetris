@@ -11,7 +11,7 @@ public class Piece : MonoBehaviour
     public int rotationIndex { get; private set; }
 
     public float stepDelay = 1f;
-    public float moveDelay = 0.1f;
+    public float moveDelay = .1f;
     public float lockDelay = 0.25f;
 
     private float stepTime;
