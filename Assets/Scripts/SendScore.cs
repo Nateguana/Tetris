@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SendScore : MonoBehaviour
 {
     public GameObject nameInput;
     public GameObject sendScoreButton;
     public GameObject closeButton;
+
+    public TextMeshProUGUI scoreText;
 
     private int numOfButtons = 3;
     private int selectedButton;
@@ -20,6 +24,7 @@ public class SendScore : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(nameInput);
         selectedButton = 1;
         previousAxisState = false;
+        scoreText.text = "SCORE: " + FindObjectOfType<Board>().score;
     }
 
     void Update()
@@ -53,6 +58,7 @@ public class SendScore : MonoBehaviour
     {
         SceneManager.LoadScene(2);
     }
+
     public void ShowPlace(uint place)
     {
         //called after delay
@@ -68,8 +74,11 @@ public class SendScore : MonoBehaviour
 
     public void SendScoreToLeaderboard ()
     {
+        string name = nameInput.GetComponent<TMP_InputField>().text;
+
         LeaderBoard.SendScore(this,new LeaderBoard.Score(FindObjectOfType<Board>().score, 
-            "Name"/* how to do this?*/),i=> ShowPlace(i));
+            name),i=> ShowPlace(i));
+        RestartTetris();
     }
 
     private bool GetNegAxisDown(string axisName)
