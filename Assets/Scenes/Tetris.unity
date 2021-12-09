@@ -1327,6 +1327,7 @@ MonoBehaviour:
   nameInput: {fileID: 786770592}
   sendScoreButton: {fileID: 944401547}
   closeButton: {fileID: 53195302}
+  scoreText: {fileID: 1022898378}
 --- !u!1 &752731556
 GameObject:
   m_ObjectHideFlags: 0
