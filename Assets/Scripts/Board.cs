@@ -14,6 +14,8 @@ public class Board : MonoBehaviour
     public Vector2Int boardSize = new Vector2Int(10, 20);
     public Vector2Int spawnPosition = new Vector2Int(-1, 8);
 
+    public ulong score = 0;
+
     [SerializeField] private Flashing flashEffect;
 
     public RectInt Bounds
@@ -63,6 +65,7 @@ public class Board : MonoBehaviour
 
         Time.timeScale = 0f;
         Piece.gameOver = true;
+        if (original)
         sendScoreScreen.SetActive(true);
     }
 

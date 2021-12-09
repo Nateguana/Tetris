@@ -53,10 +53,23 @@ public class SendScore : MonoBehaviour
     {
         SceneManager.LoadScene(2);
     }
+    public void ShowPlace(uint place)
+    {
+        //called after delay
+        if(place == uint.MaxValue)
+        {
+            //network error
+        }
+        else
+        {
+            //show place on leaderboard
+        }
+    }
 
     public void SendScoreToLeaderboard ()
     {
-        // how to do this?
+        LeaderBoard.SendScore(this,new LeaderBoard.Score(FindObjectOfType<Board>().score, 
+            "Name"/* how to do this?*/),i=> ShowPlace(i));
     }
 
     private bool GetNegAxisDown(string axisName)

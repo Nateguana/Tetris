@@ -26,12 +26,12 @@ public class LeaderBoard : ScrollText
     private static string ConvertTime(ulong? time) =>
            DateTimeOffset.FromUnixTimeMilliseconds((long)time).Date.ToShortDateString();
 
-    public static void SendScore(MonoBehaviour that, Score score, Action<string> callback)
+    public static void SendScore(MonoBehaviour that, Score score, Action<uint> callback)
     {
         string data = JsonConvert.SerializeObject(score);
         that.StartCoroutine(Mathx.PutRequest(URL, data, e =>{
-            callback($"You got slot {JsonConvert.DeserializeObject<Place>(e).place} on the leaderboard");
-        }, () => callback("Network Error")));
+            callback(JsonConvert.DeserializeObject<Place>(e).place);
+        }, () => callback(uint.MaxValue)));
     }
     [Serializable]
     public struct Score
@@ -50,6 +50,6 @@ public class LeaderBoard : ScrollText
     [Serializable]
     public struct Place
     {
-        public int place;
+        public uint place;
     }
 }
