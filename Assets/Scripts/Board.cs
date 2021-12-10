@@ -8,6 +8,7 @@ public class Board : MonoBehaviour
     public Tilemap tilemap { get; private set; }
     public Piece activePiece { get; private set; }
     public ScreenShake screenShake;
+    public ParticleSystem particles, particlePrefab;
 
     public Tile[] tiles;
     public Vector2Int boardSize = new Vector2Int(10, 20);
@@ -159,6 +160,11 @@ public class Board : MonoBehaviour
         // Clear all tiles in the row
         for (int col = bounds.xMin; col < bounds.xMax; col++)
         {
+            if (!original)
+            {
+            particles.transform.position = new Vector3Int(0, row + 1/2, 0);
+            particles.Play();
+            }
             Vector3Int position = new Vector3Int(col, row, 0);
             tilemap.SetTile(position, null);
         }
