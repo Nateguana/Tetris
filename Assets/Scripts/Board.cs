@@ -142,7 +142,7 @@ public class Board : MonoBehaviour
                 AudioManager.Play("LandPlaceholder"); // Placeholder
             }
         }
-        if (rowsCleared > 0 && rowsCleared < 5)
+        if (!original&& rowsCleared > 0 && rowsCleared < 5)
             AddScore(Data.points[rowsCleared - 1]);
     }
 

@@ -75,8 +75,8 @@ public class SendScore : MonoBehaviour
     public void SendScoreToLeaderboard ()
     {
         string name = nameInput.GetComponent<TMP_InputField>().text;
-
-        LeaderBoard.SendScore(this,new LeaderBoard.Score(FindObjectOfType<Board>().score, 
+        Board b = FindObjectOfType<Board>();
+        LeaderBoard.SendScore(b,new LeaderBoard.Score(FindObjectOfType<Board>().score, 
             name),i=> ShowPlace(i));
         RestartTetris();
     }

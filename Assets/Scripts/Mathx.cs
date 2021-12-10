@@ -18,23 +18,25 @@ public static class Mathx
     }
     public static IEnumerator Request(UnityWebRequest request, Action<string> success, Action error = null)
     {
-        using (request)
+        yield return new WaitForSeconds(.25f);
+        yield return request.SendWebRequest();
+        if (request.result != UnityWebRequest.Result.Success)
         {
-            yield return request.SendWebRequest();
-            if (request.result != UnityWebRequest.Result.Success)
-            {
-                error();
-                yield break;
-            }
-            success(request.downloadHandler.text);
+            error();
+            request.Dispose();
+            yield break;
         }
+        success(request.downloadHandler.text);
+        request.Dispose();
     }
     public static IEnumerator GetRequest(string uri, Action<string> success, Action error = null)
     {
-        yield return Request(UnityWebRequest.Get(uri),success,error);
+        yield return Request(UnityWebRequest.Get(uri), success, error);
     }
     public static IEnumerator PutRequest(string uri, string data, Action<string> success, Action error = null)
     {
-        yield return Request(UnityWebRequest.Put(uri, data), success, error);
+        UnityWebRequest request = UnityWebRequest.Put(uri, data);
+        request.SetRequestHeader("Content-Type", "text/json");
+        yield return Request(request, success, error);
     }
 }

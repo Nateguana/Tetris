@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public class LeaderBoard : ScrollText
 {
-    const string URL = "https://gamestream.stream/api/leaderboard?number=100";
+    const string URL = "https://gamestream.stream/api/leaderboard";
 
     protected override void Start()
     {
@@ -17,7 +17,7 @@ public class LeaderBoard : ScrollText
     private IEnumerator Delay()
     {
         yield return new WaitForSeconds(.25f);
-        yield return Mathx.GetRequest(URL, makeBoard, () => txt.text = "Network Error");
+        yield return Mathx.GetRequest(URL+ "?number=100", makeBoard, () => txt.text = "Network Error");
     }
     private void makeBoard(string text)
     {
@@ -34,7 +34,8 @@ public class LeaderBoard : ScrollText
     public static void SendScore(MonoBehaviour that, Score score, Action<uint> callback)
     {
         string data = JsonConvert.SerializeObject(score);
-        that.StartCoroutine(Mathx.PutRequest(URL, data, e =>{
+        MonoBehaviour m = FindObjectOfType<AudioManager>();
+        m.StartCoroutine(Mathx.PutRequest(URL, data, e => {
             callback(JsonConvert.DeserializeObject<Place>(e).place);
         }, () => callback(uint.MaxValue)));
     }
