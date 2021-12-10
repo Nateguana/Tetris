@@ -8,11 +8,14 @@ public class Board : MonoBehaviour
     public Tilemap tilemap { get; private set; }
     public Piece activePiece { get; private set; }
     public ScreenShake screenShake;
+    public GameObject sendScoreScreen;
     public ParticleSystem particles, particlePrefab;
 
     public Tile[] tiles;
     public Vector2Int boardSize = new Vector2Int(10, 20);
     public Vector2Int spawnPosition = new Vector2Int(-1, 8);
+
+    public ulong score = 0;
 
     [SerializeField] private Flashing flashEffect;
 
@@ -34,6 +37,7 @@ public class Board : MonoBehaviour
 
     private void Start()
     {
+        Piece.gameOver = false;
         SpawnPiece();
     }
 
@@ -60,7 +64,12 @@ public class Board : MonoBehaviour
         tilemap.ClearAllTiles();
         AudioManager.Play("GameOverPlaceholder"); //Placeholder
 
-        // Do anything else you want on game over here..
+        if (!original)
+        {
+            Time.timeScale = 0f;
+            Piece.gameOver = true;
+            sendScoreScreen.SetActive(true);
+        }   
     }
 
     public void Set(Piece piece)
@@ -110,7 +119,7 @@ public class Board : MonoBehaviour
     {
         RectInt bounds = Bounds;
         int row = bounds.yMin;
-
+        int rowsCleared = 0;
         // Clear from bottom to top
         while (row < bounds.yMax)
         {
@@ -119,6 +128,7 @@ public class Board : MonoBehaviour
             if (IsLineFull(row))
             {
                 LineClear(row);
+                rowsCleared++;
                 AudioManager.Play("ClearPlaceholder"); //Placeholder
                 if (!original)
                 {
@@ -130,9 +140,10 @@ public class Board : MonoBehaviour
             {
                 row++;
                 AudioManager.Play("LandPlaceholder"); // Placeholder
-                AudioManager.Play("LandPlaceholder"); // Placeholder
             }
         }
+        if (rowsCleared > 0 && rowsCleared < 5)
+            AddScore(Data.points[rowsCleared - 1]);
     }
 
     public bool IsLineFull(int row)
@@ -183,6 +194,11 @@ public class Board : MonoBehaviour
 
             row++;
         }
+    }
+    public void AddScore(ulong add)
+    {
+        score += add;
+        GetComponentInChildren<TMPro.TMP_Text>().text = score.ToString();
     }
 
 }
