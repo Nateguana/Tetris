@@ -23,6 +23,5 @@ public static class Data
         V(-2, -1), V(-1, -1), V(0, -1), V( 1, -1),
         V(-2, -2), V(-1, -2), V(0, -2), V( 1, -2),
         },TetrominoRotation.none)};
-    public static readonly ushort[] points = new ushort[] { 40, 100, 300, 1200 };
 }
 
