@@ -118,7 +118,7 @@ public class Board : MonoBehaviour
     {
         RectInt bounds = Bounds;
         int row = bounds.yMin;
-
+        int rowsCleared = 0;
         // Clear from bottom to top
         while (row < bounds.yMax)
         {
@@ -127,6 +127,7 @@ public class Board : MonoBehaviour
             if (IsLineFull(row))
             {
                 LineClear(row);
+                rowsCleared++;
                 AudioManager.Play("ClearPlaceholder"); //Placeholder
                 if (!original)
                 {
@@ -138,9 +139,10 @@ public class Board : MonoBehaviour
             {
                 row++;
                 AudioManager.Play("LandPlaceholder"); // Placeholder
-                AudioManager.Play("LandPlaceholder"); // Placeholder
             }
         }
+        if (rowsCleared > 0 && rowsCleared < 5)
+            AddScore(Data.points[rowsCleared - 1]);
     }
 
     public bool IsLineFull(int row)
@@ -186,6 +188,11 @@ public class Board : MonoBehaviour
 
             row++;
         }
+    }
+    public void AddScore(ulong add)
+    {
+        score += add;
+        GetComponentInChildren<TMPro.TMP_Text>().text = score.ToString();
     }
 
 }
