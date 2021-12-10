@@ -63,10 +63,12 @@ public class Board : MonoBehaviour
         tilemap.ClearAllTiles();
         AudioManager.Play("GameOverPlaceholder"); //Placeholder
 
-        Time.timeScale = 0f;
-        Piece.gameOver = true;
-        if (original)
-        sendScoreScreen.SetActive(true);
+        if (!original)
+        {
+            Time.timeScale = 0f;
+            Piece.gameOver = true;
+            sendScoreScreen.SetActive(true);
+        }   
     }
 
     public void Set(Piece piece)
