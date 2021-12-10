@@ -1,3 +1,18 @@
+Version 0.3.0.0s5 notes
+
+- Added a score counter
+
+- Clearing tiles now increases your score
+
+- Leaderboard now updates when a player
+  sends a score
+
+- New game over screen where the player
+  can type in their name to send their 
+  high score to the leaderboard
+
+- Clearing a tile now has particle effects
+
 Version 0.2.0.0s4 notes
 
 - Added a leaderboard that is accesible
