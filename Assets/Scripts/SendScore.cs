@@ -12,6 +12,10 @@ public class SendScore : MonoBehaviour
     public GameObject sendScoreButton;
     public GameObject closeButton;
 
+    public GameObject scoreOverlay;
+    public GameObject leaderboardOverlay;
+    public GameObject popup;
+
     public TextMeshProUGUI scoreText;
 
     private int numOfButtons = 3;
@@ -64,11 +68,12 @@ public class SendScore : MonoBehaviour
         //called after delay
         if(place == uint.MaxValue)
         {
-            //network error
+            popup.SetActive(true);
         }
         else
         {
-            //show place on leaderboard
+            scoreOverlay.SetActive(false);
+            leaderboardOverlay.SetActive(true);
         }
     }
 
@@ -79,6 +84,11 @@ public class SendScore : MonoBehaviour
         LeaderBoard.SendScore(this,new LeaderBoard.Score(FindObjectOfType<Board>().score, 
             name),i=> ShowPlace(i));
         RestartTetris();
+    }
+
+    public void LeaderboardScreen()
+    {
+        SceneManager.LoadScene(6);
     }
 
     private bool GetNegAxisDown(string axisName)
