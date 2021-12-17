@@ -1,0 +1,11 @@
+Unfinished Features & Future Plans
+
+Original assets
+Custom shapes
+Splitscreen multiplayer
+Particle effect when shapes disappear
+Tetronimos having special effects
+Shapes randomly falling out of player's control
+Gradual speed increase
+Achievement system
+Combo multiplier
