@@ -11,9 +11,10 @@ public class StartMenu : MonoBehaviour
     public GameObject leaderboardButton;
     public GameObject creditsButton;
     public GameObject versionNotesButton;
+    public GameObject unfinishedFeaturesButton;
     public GameObject originalGameButton;
 
-    private int numOfButtons = 6;
+    private int numOfButtons = 7;
     private int selectedButton;
     private bool previousAxisState;
 
@@ -55,6 +56,9 @@ public class StartMenu : MonoBehaviour
                     EventSystem.current.SetSelectedGameObject(versionNotesButton);
                     break;
                 case 6:
+                    EventSystem.current.SetSelectedGameObject(unfinishedFeaturesButton);
+                    break;
+                case 7:
                     EventSystem.current.SetSelectedGameObject(originalGameButton);
                     break;
             }
@@ -74,6 +78,11 @@ public class StartMenu : MonoBehaviour
     public void VersionNotesScreen ()
     {
         SceneManager.LoadScene(4);
+    }
+
+    public void UnfinishedFeaturesScreen ()
+    {
+        SceneManager.LoadScene(7);
     }
 
     public void OriginalGame ()

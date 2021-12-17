@@ -17,9 +17,10 @@ public class PauseMenu : MonoBehaviour
     public GameObject leaderboardButton;
     public GameObject creditsButton;
     public GameObject versionNotesButton;
+    public GameObject unfinishedFeaturesButton;
     public bool scrollingText = false;
 
-    private int numOfButtons = 6;
+    private int numOfButtons = 7;
     private int selectedButton;
     private bool previousAxisState;
 
@@ -81,6 +82,9 @@ public class PauseMenu : MonoBehaviour
                     case 6:
                         EventSystem.current.SetSelectedGameObject(versionNotesButton);
                         break;
+                    case 7:
+                        EventSystem.current.SetSelectedGameObject(unfinishedFeaturesButton);
+                        break;
                 }
             }
         }
@@ -130,6 +134,11 @@ public class PauseMenu : MonoBehaviour
         Init();
         SceneManager.LoadScene(4);
         AudioManager.Play("Click3Placeholder"); // Placeholder
+    }
+
+    public void UnfinishedFeaturesScreen()
+    {
+        SceneManager.LoadScene(7);
     }
 
     public void LeaderboardScreen()
